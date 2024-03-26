@@ -656,7 +656,7 @@ Score QuiescentSearch(Thread &t, Score alpha, const Score beta) {
     }
     return lower_bound_score;
   }
-  
+
   //Move best_move = 0;
 
   //Sort move list
@@ -669,7 +669,7 @@ Score QuiescentSearch(Thread &t, Score alpha, const Score beta) {
     SortMoves(moves, t, 0);
     //SortMovesML(moves, board, 0);
   }
-  
+
   //Move loop
   for (Move move : moves) {
     //SEE pruning
@@ -684,7 +684,7 @@ Score QuiescentSearch(Thread &t, Score alpha, const Score beta) {
     t.board.UnMake();
 
     if (score > lower_bound_score) {
-      
+
       //Return beta if we fail high
       if (score >= beta) {
         //table::SaveEntry(board, move, score, 0);
@@ -930,7 +930,7 @@ Score AlphaBeta(Thread &t, Score alpha, const Score beta, Depth depth) {
     const Move move = moves[i];
 
     Depth e = 0;// Extensions
-    if (i == 0 
+    if (i == 0
         && depth >= kSingularExtensionDepth-2
         && valid_entry
         && entry.depth >= std::max(depth, kSingularExtensionDepth) - 3
@@ -1070,7 +1070,7 @@ std::pair<bool, Score> move_is_singular(Thread &t, const Depth depth,
   const Score beta = entry.get_score(t.board);
   const Score rBeta = get_singular_beta(beta, depth);
   const Score rAlpha = get_previous_score(rBeta);
-  const Depth rDepth = (depth - 3) / 2;
+  const Depth rDepth = depth / 2;
   assert(beta.is_static_eval());
   assert(rBeta.is_static_eval());
   assert(rAlpha.is_static_eval());
